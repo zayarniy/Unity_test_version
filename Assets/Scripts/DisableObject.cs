@@ -7,6 +7,7 @@ public class DisableObject : MonoBehaviour
 
 
     CanvasGroup canvasGroup;
+    public int delayBeforeFade=1;
     
 
     // Start is called before the first frame update
@@ -41,7 +42,7 @@ public class DisableObject : MonoBehaviour
     {
         print("Disable");
 
-        Invoke("StartFade", 2);
+        Invoke("StartFade", delayBeforeFade);
         //this.enabled = false;    
     }
 
