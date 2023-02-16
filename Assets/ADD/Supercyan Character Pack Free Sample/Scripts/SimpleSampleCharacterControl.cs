@@ -23,7 +23,8 @@ public class SimpleSampleCharacterControl : MonoBehaviour
     [SerializeField] private Rigidbody m_rigidBody = null;
 
     [SerializeField] private ControlMode m_controlMode = ControlMode.Direct;
-
+    public VariableJoystick variableJoystick1;//Move
+    public VariableJoystick variableJoystick2;//Rotate
     private float m_currentV = 0;
     private float m_currentH = 0;
 
@@ -40,13 +41,17 @@ public class SimpleSampleCharacterControl : MonoBehaviour
     private bool m_jumpInput = false;
 
     private bool m_isGrounded;
-
+    private float rotX=0f,rotY=0f;
+    public float clampAngle = 80.0f;
     private List<Collider> m_collisions = new List<Collider>();
 
     private void Awake()
     {
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
+        Vector3 rot = transform.localRotation.eulerAngles;
+        rotX = rot.x;
+        rotY = rot.y;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -165,9 +170,35 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     private void DirectUpdate()
     {
-        float v = Input.GetAxis("Vertical");
-        float h = Input.GetAxis("Horizontal");
+        float v, h;
+        if (variableJoystick1 != null)
+        {
+            v = variableJoystick1.Vertical;
+            h = variableJoystick1.Horizontal;
+            //= Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
+            //rb.AddForce(direction * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+        }
+        else
+        {
 
+            v = Input.GetAxis("Vertical");
+            h = Input.GetAxis("Horizontal");
+        }
+        float mouseSensitivity = 100f;
+
+        if (variableJoystick2 != null)
+        {
+            float mouseX = variableJoystick2.Horizontal;
+            float mouseY = variableJoystick2.Vertical;
+
+            rotY += mouseX * mouseSensitivity * Time.deltaTime;
+            rotX += mouseY * mouseSensitivity * Time.deltaTime;
+
+            rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
+
+            Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
+            transform.rotation = localRotation;
+        }
         Transform camera = Camera.main.transform;
 
         if (Input.GetKey(KeyCode.LeftShift))
