@@ -6,14 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Scene00 - City 01.unity
+    path: Assets/Scenes/MainMenu.unity
+    guid: c9098911fe0cf524cb1f8c356e3eae17
+  - enabled: 1
+    path: Assets/Scenes/City.unity
     guid: 7ed4dbe9fdfec704da78ff845f44c3c0
+  - enabled: 1
+    path: Assets/Scenes/Results.unity
+    guid: 9ad735a0fb2766745996c1519dafa28f
+  - enabled: 1
+    path: Assets/Scenes/How.unity
+    guid: ab3393f274e18704eb3424a75dd29518
   - enabled: 0
     path: Assets/Scenes/Scene00 - City part.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/Scenes/Scene - Flashscreen.unity
-    guid: c9098911fe0cf524cb1f8c356e3eae17
   - enabled: 0
     path: Assets/ADD/Samples/Google Cardboard XR Plugin for Unity/1.19.0/Hello Cardboard/Scenes/HelloCardboard.unity
     guid: 145a2a45d7bc746b19cb68410368bf96

@@ -33,20 +33,20 @@ public class MouseLook : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             
-            print("Fire 1");
+            //print("Fire 1");
             //print(crosshair.GetTarget());
         }
         if (Input.GetButton("Fire2"))
         {
-            print("Fire 2");
+            //print("Fire 2");
         }
         if (Input.GetButton("Fire3"))
         {
-            print("Fire 3");
+            //print("Fire 3");
         }
         if (Input.GetButton("Jump"))
         {
-            print("Jump");
+            //print("Jump");
         }
 
     }

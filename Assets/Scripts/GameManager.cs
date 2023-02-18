@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    int score  =0;
+    public static int score  =0;
 
     public TMPro.TextMeshProUGUI textScore;
     //public Canvas scoreCanvas;
     
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SimpleCollectibleScript.ScoreUpdate += ScoreUpdate;
     }
@@ -27,9 +27,10 @@ public class GameManager : MonoBehaviour
 
     public void ScoreUpdate(int score=1)
     {
-        this.score += score;
+        GameManager.score += score;
         print(System.DateTime.Now);
-        textScore.text = this.score.ToString();
+        print(textScore);
+        textScore.text = GameManager.score.ToString();
         //canvas.enabled = false;
     }
 
@@ -37,4 +38,17 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+
+
+    public void ScoreScene()
+    {
+        SceneManager.LoadScene("Results");
+        PlayerPrefs.SetString("Results", string.Join("\n", GameManager.score));
+    }
+
+
+
+
+
 }
