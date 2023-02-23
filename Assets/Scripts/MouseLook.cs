@@ -9,6 +9,7 @@ public class MouseLook : MonoBehaviour
 
     private float rotY = 0.0f; // rotation around the up/y axis
     private float rotX = 0.0f; // rotation around the right/x axis
+    bool IsMouseOverGameWindow { get { return !(0 > Input.mousePosition.x || 0 > Input.mousePosition.y || Screen.width < Input.mousePosition.x || Screen.height < Input.mousePosition.y); } }
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
+        //if (!IsMouseOverGameWindow) return;
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = -Input.GetAxis("Mouse Y");
 
