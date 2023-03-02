@@ -8,6 +8,9 @@ public class VideoController : MonoBehaviour
     // Start is called before the first frame update
 
     public VideoClip videoClip;
+    
+    public double time;
+
     VideoPlayer player;
     void Start()
     {
@@ -22,7 +25,8 @@ public class VideoController : MonoBehaviour
 
     void Play()
     {
-        player.Play();
+        
+        player.Play();       
     }
 
     void Puase()
