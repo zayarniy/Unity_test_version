@@ -10,6 +10,8 @@ public class VideoController2 : MonoBehaviour
     public VideoPlayer video;
     public Slider slider;
 
+    public double start=0;
+    public double end=0;
 
     bool isDone;
 
@@ -149,6 +151,7 @@ public class VideoController2 : MonoBehaviour
     void Start()
     {
         video= GetComponent<VideoPlayer>();
+        video.playbackSpeed = 1;
         Debug.Log("video url:" + video.url);
         video.Prepare();
     }
@@ -157,28 +160,37 @@ public class VideoController2 : MonoBehaviour
     void Update()
     {
         if (!isPrepare) return;
-        slider.value = (float)NTime;
+        if (end!=0 && video.time>=end)
+            video.Stop();
+        //slider.value = (float)NTime;
     }
 
     public void LoadVideo(string name)
     {
-        string temp = video.url; //Application.dataPath + "/Videos/" + name;/*.mp4,.avi,.mov*/
-        if (video.url == temp) return;
-        video.url = temp;
+        //string temp = video.url; //Application.dataPath + "/Videos/" + name;/*.mp4,.avi,.mov*/
+        //if (video.url == temp) return;
+        //video.url = temp;
         video.Prepare();
-
+        video.playbackSpeed = 1;
         Debug.Log("can set direct audio volume: "+video.canSetDirectAudioVolume);
         Debug.Log("can set playback speed: " + video.canSetPlaybackSpeed);
         Debug.Log("can set set skip on drop: " + video.canSetSkipOnDrop);
         Debug.Log("can set time: " + video.canSetTime);
         Debug.Log("can step: " + video.canStep);        
+        if (start!=0)
+        {
+            video.time = start;
+        }
     }
 
     public void PlayVideo()
     {
+        LoadVideo(video.url);
         Debug.Log("Play video");
+        Debug.Log("video url:" + video.url);
         Debug.Log("isPrepare"+isPrepare);
-        if (!isPrepare) return;
+        //if (!isPrepare) return;
+        print("start:" + start + " end:" + end);
         video.Play();
     }
 
