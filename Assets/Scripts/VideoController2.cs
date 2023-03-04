@@ -10,8 +10,8 @@ public class VideoController2 : MonoBehaviour
     public VideoPlayer video;
     public Slider slider;
 
-    public double start=0;
-    public double end=0;
+    public double start = 0;
+    public double end = 0;
 
     bool isDone;
 
@@ -23,7 +23,8 @@ public class VideoController2 : MonoBehaviour
         }
     }
 
-    public bool isPaused {
+    public bool isPaused
+    {
 
         get
         {
@@ -57,7 +58,7 @@ public class VideoController2 : MonoBehaviour
         }
         set
         {
-            isDone = value; 
+            isDone = value;
         }
 
     }
@@ -93,7 +94,7 @@ public class VideoController2 : MonoBehaviour
     {
         video.errorReceived += errorReciever;
         video.frameReady += frameReady;
-        video.loopPointReached += loopPointReached ;
+        video.loopPointReached += loopPointReached;
         video.prepareCompleted += prepareCompleted;
         video.seekCompleted += seekCompleted;
         video.started += started;
@@ -112,7 +113,7 @@ public class VideoController2 : MonoBehaviour
 
     void errorReciever(VideoPlayer v, string msg)
     {
-        Debug.Log("video player error:"+msg);
+        Debug.Log("video player error:" + msg);
     }
 
     void frameReady(VideoPlayer v, long frame)
@@ -150,7 +151,7 @@ public class VideoController2 : MonoBehaviour
 
     void Start()
     {
-        video= GetComponent<VideoPlayer>();
+        video = GetComponent<VideoPlayer>();
         video.playbackSpeed = 1;
         Debug.Log("video url:" + video.url);
         video.Prepare();
@@ -160,7 +161,7 @@ public class VideoController2 : MonoBehaviour
     void Update()
     {
         if (!isPrepare) return;
-        if (end!=0 && video.time>=end)
+        if (end != 0 && video.time >= end)
             video.Stop();
         //slider.value = (float)NTime;
     }
@@ -172,12 +173,12 @@ public class VideoController2 : MonoBehaviour
         //video.url = temp;
         video.Prepare();
         video.playbackSpeed = 1;
-        Debug.Log("can set direct audio volume: "+video.canSetDirectAudioVolume);
+        Debug.Log("can set direct audio volume: " + video.canSetDirectAudioVolume);
         Debug.Log("can set playback speed: " + video.canSetPlaybackSpeed);
         Debug.Log("can set set skip on drop: " + video.canSetSkipOnDrop);
         Debug.Log("can set time: " + video.canSetTime);
-        Debug.Log("can step: " + video.canStep);        
-        if (start!=0)
+        Debug.Log("can step: " + video.canStep);
+        if (start != 0)
         {
             video.time = start;
         }
@@ -188,7 +189,7 @@ public class VideoController2 : MonoBehaviour
         LoadVideo(video.url);
         Debug.Log("Play video");
         Debug.Log("video url:" + video.url);
-        Debug.Log("isPrepare"+isPrepare);
+        Debug.Log("isPrepare" + isPrepare);
         //if (!isPrepare) return;
         print("start:" + start + " end:" + end);
         video.Play();
@@ -210,7 +211,7 @@ public class VideoController2 : MonoBehaviour
     public void StopVideo()
     {
         if (!isPrepare) return;
-        video.Stop();        
+        video.Stop();
     }
 
     public void LoopVideo(bool toggle)
@@ -223,7 +224,7 @@ public class VideoController2 : MonoBehaviour
     {
         if (!video.canSetTime) return;
         if (!isPrepare) return;
-        nTime = Mathf.Clamp(nTime,0,1);
+        nTime = Mathf.Clamp(nTime, 0, 1);
         video.time = nTime * Duration;
     }
 
@@ -231,7 +232,7 @@ public class VideoController2 : MonoBehaviour
     {
         if (!video.canSetPlaybackSpeed) return;
         video.playbackSpeed += 1;
-        video.playbackSpeed=Mathf.Clamp(video.playbackSpeed,0,10);
+        video.playbackSpeed = Mathf.Clamp(video.playbackSpeed, 0, 10);
     }
 
     public void DecrementPlaybackSpeed()

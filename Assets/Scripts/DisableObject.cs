@@ -15,7 +15,7 @@ public class DisableObject : MonoBehaviour
     {
         
         canvasGroup= GetComponent<CanvasGroup>();
-        print(canvasGroup);
+        //print(canvasGroup);
     }
 
     // Update is called once per frame
